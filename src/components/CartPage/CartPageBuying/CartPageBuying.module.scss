@@ -1,0 +1,94 @@
+@import "../../../vars";
+
+.buying {
+    &__summary {
+        margin-top: 20px;
+        margin-bottom: 45px;
+        font-weight: 500;
+        font-size: 1.375rem;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 40px;
+
+        & span {
+            font-weight: 700;
+        }
+    }
+
+    &__buttons {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.summary {
+    &__price {
+        span {
+            color: $orange  ;
+        }
+    }
+}
+
+.button {
+    color: white;
+    font-weight: 700;
+    background-color: $orange;
+    border-radius: 30px;
+    padding: 15px 29px;
+    transition: background-color 0.2s ease;
+
+    &.gray {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 13px;
+        background-color: transparent;
+        border: 1px solid $buttonXGray;
+        font-weight: 500;
+        color: $buttonXGray;
+
+        & svg {
+            width: 8px;
+            height: 14px;
+        }
+        
+        &:hover {
+            background-color: rgba($color: #000000, $alpha: 0.03);
+        }
+        &:active {
+            background-color: rgba($color: #000000, $alpha: 0.06);
+        }
+    }
+
+    &:hover {
+        background-color: $darkOrange;
+    }
+
+    &:active {
+        background-color: rgba($color: #ff6303, $alpha: 0.9);
+    }
+
+}
+
+@media (max-width: 550px) {
+    .buying {
+        &__summary {
+            margin-top: 20px;
+            flex-direction: column;
+            gap: 10px;
+        }
+    }
+    
+}
+
+
+@media (max-width: 420px) {
+    .buying {
+
+        &__buttons {
+            flex-direction: column;
+            gap: 10px;
+        }
+    }
+    
+}

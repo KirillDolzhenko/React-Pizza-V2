@@ -1,0 +1,43 @@
+@import "../../../../vars";
+
+.cartPageButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: $orange;
+    padding: 7px   ;
+    border-radius: 50%;
+    border: 2px solid $orange;
+    transition: background-color 0.2s ease;
+
+    & svg {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 10px;
+        height: 10px;
+    }
+
+    &:hover {
+        background-color: rgba($color: #ff6303, $alpha: 0.1);
+    }
+
+    &:active {
+        background-color: rgba($color: #ff6303, $alpha: 0.2);
+    }
+
+
+    &.gray {
+        border: 2px solid $buttonXGray;
+        color: $buttonXGray;
+        &:hover {
+            background-color: rgba($color: #000000, $alpha: 0.03);
+        }
+        &:active {
+            background-color: rgba($color: #000000, $alpha: 0.06);
+        }
+    } 
+
+}
