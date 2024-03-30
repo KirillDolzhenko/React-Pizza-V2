@@ -8,6 +8,7 @@ export function Option({ children, status, onClick }: IOption) {
       <button
         onClick={onClick}
         className={classNames("options__element", activeClass)}
+        disabled={Boolean(activeClass)}
       >
         {children}
       </button>

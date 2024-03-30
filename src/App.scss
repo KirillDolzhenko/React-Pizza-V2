@@ -432,6 +432,42 @@
     }
 }
 
+// .navigation {
+    .pizzaPagination {
+        display: flex;
+        justify-content: center;
+        & ul {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 2%;
+
+            & a {
+                user-select: none;
+                font-weight: 700;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 40px;
+                height: 40px;
+                border: 2px solid $darkGray;
+                border-radius: 50%;
+                background-color: rgba($orange, 0);
+
+                &:hover {
+                    background-color: rgba($orange, 0.5);                    
+                }
+                &:active {
+                    background-color: rgba($orange, 0.7);                    
+                }
+            }
+        }
+    .selected {
+        & a {
+            background-color: rgba($orange, 0.3);
+        } 
+    }}
+// }
+
 
 //MEDIA
 

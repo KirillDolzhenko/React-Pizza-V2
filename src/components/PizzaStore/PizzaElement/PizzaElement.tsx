@@ -1,5 +1,10 @@
 import { useState } from "react";
 import plusIcon from "../../../assets/images/pizzaShop/plus.svg";
+import { addItem } from "../../../redux/slices/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
+import { IItem } from "../../../redux/slices/pizzasSlice";
+import { ICartItem } from "../../../redux/slices/cartSlice";
 
 export interface IProps {
   image: string;
@@ -7,7 +12,7 @@ export interface IProps {
   thickness: IActive[];
   diameter: IActive[];
   price: number;
-  cart: number;
+  cart?: number;
   id?: number;
 }
 
@@ -23,10 +28,28 @@ export function PizzaElement({
   diameter,
   price,
   cart,
-}: IProps) {
-  const [cartAmount, setCartAmount] = useState<number>(cart);
-  const [activeThickness, setActiveThickness] = useState<number | null>(null);
-  const [activeDiameter, setActiveDiameter] = useState<number | null>(null);
+  id,
+}: IItem) {
+  const cartItem: ICartItem[] = useSelector((state: RootState) =>
+    state.cartSlice.items.filter((el: ICartItem) => el.id == id)
+  );
+
+  const cartItems = useSelector((state: RootState) => state.cartSlice.items);
+
+  const cartAmount = cartItem
+    ? cartItem.reduce((sum: number, el: ICartItem) => {
+        return el.count + sum;
+      }, 0)
+    : 0;
+
+  const [activeThickness, setActiveThickness] = useState<number | null>(
+    Number(thickness.filter((el) => !Boolean(el.disabled))[0].title)
+  );
+  const [activeDiameter, setActiveDiameter] = useState<number | null>(
+    Number(diameter.filter((el) => !Boolean(el.disabled))[0].title)
+  );
+
+  const dispatch = useDispatch();
 
   let thicknessArr = thickness.map((el) => (
     <li key={el.title}>
@@ -64,7 +87,24 @@ export function PizzaElement({
       </div>
       <div className="pizzaOption__price">
         <span>от {price}</span>
-        <button onClick={() => setCartAmount(cartAmount + 1)}>
+        <button
+          onClick={() => {
+            dispatch(
+              addItem({
+                id,
+                title,
+                image,
+                thickness: activeThickness,
+                diameter: activeDiameter,
+                price,
+              })
+            );
+            console.log(cartItems, id);
+            console.log(thickness);
+            console.log(activeThickness, activeDiameter);
+            // setCartAmount(cartAmount + 1);
+          }}
+        >
           <svg>
             <use xlinkHref={`${plusIcon}#icon`} />
           </svg>

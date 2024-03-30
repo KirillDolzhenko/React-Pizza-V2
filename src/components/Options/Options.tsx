@@ -1,17 +1,20 @@
 import { useContext, useState } from "react";
 import { Option } from "./Option/Option";
 import { Sorting } from "./Sorting/Sorting";
-import { ContextStore } from "../PizzaStore/PizzaStore";
-import { Context } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "../../redux/store";
+import { setCategory } from "../../redux/slices/categorySlice";
+import { setCurrentPage } from "../../redux/slices/paginationSlice";
 
 export function Options() {
-  const { value, setContext } = useContext(ContextStore);
+  const category = useSelector(
+    (state: RootState) => state.categorySlice.category
+  );
+  const dispatch = useDispatch();
 
   function changeActiveCategory(id: number) {
-    setContext({
-      ...value,
-      category: id,
-    });
+    dispatch(setCategory(id));
+    dispatch(setCurrentPage(1));
   }
 
   let arrayOptions = [
@@ -26,8 +29,10 @@ export function Options() {
   let Options = arrayOptions.map((el, ind) => (
     <Option
       key={ind}
-      onClick={() => changeActiveCategory(ind)}
-      status={value.category === ind}
+      onClick={() => {
+        changeActiveCategory(ind);
+      }}
+      status={category === ind}
     >
       {el}
     </Option>

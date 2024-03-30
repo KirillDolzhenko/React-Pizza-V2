@@ -1,13 +1,8 @@
 import ContentLoader from "react-content-loader";
 
-interface IPELoading {
-  key: number;
-}
-
-export function PizzaElementLoading({ key }: IPELoading) {
+export function PizzaElementLoading() {
   return (
     <ContentLoader
-      key={key}
       className="pizzaOptions__element pizzaOption"
       speed={2}
       width={280}

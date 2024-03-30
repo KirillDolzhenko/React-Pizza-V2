@@ -3,11 +3,16 @@ import xImage from "../../../../assets/images/cartBlock/x.svg";
 import minusImage from "../../../../assets/images/cartBlock/minus.svg";
 import plusImage from "../../../../assets/images/cartBlock/plus.svg";
 
-export function cartPageCuttonCreator(type: string) {
+interface IPropsCPBCreator {
+  type: string;
+  onClick?: () => void;
+}
+
+export function CartPageCuttonCreator({ type, onClick }: IPropsCPBCreator) {
   switch (type) {
     case "+":
       return (
-        <CartPageButton>
+        <CartPageButton onClick={onClick}>
           {
             <svg>
               <use href={`${plusImage}#id`} />
@@ -17,7 +22,7 @@ export function cartPageCuttonCreator(type: string) {
       );
     case "-":
       return (
-        <CartPageButton>
+        <CartPageButton onClick={onClick}>
           {
             <svg>
               <use href={`${minusImage}#id`} />
@@ -27,7 +32,7 @@ export function cartPageCuttonCreator(type: string) {
       );
     case "x":
       return (
-        <CartPageButton colorBut="gray">
+        <CartPageButton onClick={onClick} colorBut="gray">
           {
             <svg>
               <use href={`${xImage}#id`} />

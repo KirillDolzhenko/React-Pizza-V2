@@ -1,8 +1,20 @@
 import classes from "./CartPageBuying.module.scss";
 import classNames from "classnames";
 import pathImg from "../../../assets/images/cartBlock/path.svg";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
+import { ICartItem } from "../../../redux/slices/cartSlice";
 
 export function CartPageBuying() {
+  const amount = useSelector((state: RootState) =>
+    state.cartSlice.items.reduce((sum: number, el: ICartItem) => {
+      return el.count + sum;
+    }, 0)
+  );
+  const priceCart = useSelector(
+    (state: RootState) => state.cartSlice.totalPrice
+  );
+
   return (
     <section className={classes.buying}>
       <p
@@ -12,10 +24,10 @@ export function CartPageBuying() {
         })}
       >
         <p className={classes.summary__count}>
-          Всего пицц: <span>3 шт.</span>
+          Всего пицц: <span>{amount} шт.</span>
         </p>
         <p className={classes.summary__price}>
-          Сумма заказа: <span>900 руб.</span>
+          Сумма заказа: <span>{priceCart} руб.</span>
         </p>
       </p>
       <div className={classes.buying__buttons}>

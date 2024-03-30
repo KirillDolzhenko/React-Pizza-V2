@@ -1,24 +1,37 @@
 import classNames from "classnames";
 import classes from "../CartPage.module.scss";
-import image from "../../../assets/images/cartBlock/pizza.png";
 import { DivisionLine } from "../../DivisionLine/DivisionLine";
-import { cartPageCuttonCreator } from "./CartPageBlocks/CartPageButtonCreator";
+import { CartPageCuttonCreator } from "./CartPageBlocks/CartPageButtonCreator";
+import { useDispatch } from "react-redux";
+import {
+  addItem,
+  decreaseItem,
+  deleteItem,
+} from "../../../redux/slices/cartSlice";
 
 interface IPropsCartElement {
+  id: number;
   image: string;
   title: string;
-  desc: string;
   number: number;
   price: number;
+  thickness: number;
+  diameter: number;
 }
 
 export function CartPageElement({
+  id,
   image,
   title,
-  desc,
+  diameter,
+  thickness,
   number,
   price,
 }: IPropsCartElement) {
+  const dispatch = useDispatch();
+
+  let arrThickness = ["тонкое", "традиционное"];
+
   return (
     <li
       className={classNames({
@@ -28,22 +41,46 @@ export function CartPageElement({
     >
       <div className={classes.pizzasItem__content}>
         <div className={classes.pizzasItem__desc}>
-          <div className={classes.pizzaOption__img}>
+          <div className={classes.pizzasItem__img}>
             <img src={image} alt="pizzaImage" />
           </div>
           <div className={classes.pizzasItem__text}>
             <h3>{title}</h3>
-            <p>{desc}</p>
+            <p>{`${arrThickness[thickness]} тесто, ${diameter} см.`}</p>
           </div>
         </div>
         <div className={classes.pizzasItem__buttons}>
           <div className={classes.pizzasItem__count}>
-            {cartPageCuttonCreator("-")}
+            <CartPageCuttonCreator
+              type={"-"}
+              onClick={() =>
+                dispatch(decreaseItem({ id, thickness, diameter }))
+              }
+            />
             <span>{number}</span>
-            {cartPageCuttonCreator("+")}
+            <CartPageCuttonCreator
+              type={"+"}
+              onClick={() => {
+                dispatch(
+                  addItem({
+                    id,
+                    title,
+                    image,
+                    thickness,
+                    diameter,
+                    price,
+                  })
+                );
+              }}
+            />
           </div>
           <div className={classes.pizzasItem__price}>{price} руб.</div>
-          {cartPageCuttonCreator("x")}
+          <CartPageCuttonCreator
+            type={"x"}
+            onClick={() => {
+              dispatch(deleteItem({ id, thickness, diameter }));
+            }}
+          />
         </div>
       </div>
       <DivisionLine />

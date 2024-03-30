@@ -1,6 +1,7 @@
 import { Logo } from "./Logo/Logo";
 import { Cart } from "./Cart/Cart";
 import { Link, Route, Routes } from "react-router-dom";
+import { PizzaStoreSearch } from "./PizzaStoreSearch/PizzaStoreSearch";
 
 export function Header() {
   return (
@@ -9,6 +10,7 @@ export function Header() {
         <Link to="/">
           <Logo />
         </Link>
+        <PizzaStoreSearch />
         <Routes>
           <Route
             path="/"

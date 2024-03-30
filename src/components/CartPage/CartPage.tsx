@@ -5,7 +5,23 @@ import { CartPageElement } from "./CartPageElement/CartPageElement";
 import image from "../../assets/images/cartBlock/pizza.png";
 import { CartPageHeader } from "./CartPageHeader/CartPageHeader";
 import { CartPageBuying } from "./CartPageBuying/CartPageBuying";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
+
+import { ICartItem } from "../../redux/slices/cartSlice";
+
 export function CartPage() {
+  const items: ICartItem[] = useSelector(
+    (state: RootState) => state.cartSlice.items
+  );
+  const amount = items.reduce((sum: number, el: ICartItem) => {
+    return el.count + sum;
+  }, 0);
+
+  if (!amount) {
+    return <p>питс нет</p>;
+  }
+
   return (
     <>
       <div className={classes.container}>
@@ -14,27 +30,19 @@ export function CartPage() {
         <section className={classes.pizzasCart}>
           <DivisionLine />
           <ul className={classes.pizzasCart__list}>
-            <CartPageElement
-              image={image}
-              title="Сырные шареки"
-              desc="тонкое тесто, 10 см."
-              number={1}
-              price={300}
-            />
-            <CartPageElement
-              image={image}
-              title="Сырные шареки"
-              desc="тонкое тесто, 10 см."
-              number={9}
-              price={400}
-            />
-            <CartPageElement
-              image={image}
-              title="Сырные шареки"
-              desc="тонкое тесто, 10 см."
-              number={1}
-              price={500}
-            />
+            {items.length > 0
+              ? items.map((el: ICartItem) => (
+                  <CartPageElement
+                    id={el.id}
+                    image={el.image}
+                    title={el.title}
+                    thickness={el.thickness}
+                    diameter={el.diameter}
+                    number={el.count}
+                    price={el.price}
+                  />
+                ))
+              : "питс нема"}
           </ul>
         </section>
         <CartPageBuying />
