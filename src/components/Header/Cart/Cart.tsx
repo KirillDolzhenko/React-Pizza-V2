@@ -1,19 +1,22 @@
 import { useSelector } from "react-redux";
 import logoImg from "../../../assets/images/header/cart.svg";
 import { RootState } from "../../../redux/store";
-import {
-  ICartItem,
-  selectorCartTotalPrice,
-} from "../../../redux/slices/cartSlice";
+import { useEffect, useMemo } from "react";
+import { countItems } from "../../../functions/countItems";
+import { saveCartLS } from "../../../functions/saveCartLS";
 
 export function Cart() {
-  const amount = useSelector((state: RootState) =>
-    state.cartSlice.items.reduce((sum: number, el: ICartItem) => {
-      return el.count + sum;
-    }, 0)
-  );
+  const items = useSelector((state: RootState) => state.cartSlice.items);
 
-  const price = useSelector(selectorCartTotalPrice);
+  const amount = useMemo(() => {
+    return countItems(items);
+  }, [items]);
+
+  const price = useSelector((state: RootState) => state.cartSlice.totalPrice);
+
+  useEffect(() => {
+    saveCartLS(items);
+  }, [items]);
 
   return (
     <button className="cart">

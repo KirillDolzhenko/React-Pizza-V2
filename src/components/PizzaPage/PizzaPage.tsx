@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom";
-import { fetchItem, setPizzaPage } from "../../redux/slices/descSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import { useEffect } from "react";
+import { fetchItem } from "../../redux/slices/desc/asyncThunk";
+import { setPizzaPage } from "../../redux/slices/desc/slice";
 
 export function PizzaPage() {
   const pizza = useSelector((state: RootState) => state.descSlice.item);

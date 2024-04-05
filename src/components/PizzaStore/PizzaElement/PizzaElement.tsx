@@ -1,12 +1,12 @@
 import { memo, useState } from "react";
 import plusIcon from "../../../assets/images/pizzaShop/plus.svg";
-import { addItem, selectorCartItems } from "../../../redux/slices/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/store";
-import { IItem } from "../../../redux/slices/pizzasSlice";
-import { ICartItem } from "../../../redux/slices/cartSlice";
 import { Link } from "react-router-dom";
-import { fetchItem } from "../../../redux/slices/descSlice";
+import { ICartItem } from "../../../redux/slices/cart/types";
+import { selectorCartItems } from "../../../redux/slices/cart/selectors";
+import { addItem } from "../../../redux/slices/cart/slice";
+import { IItem } from "../../../redux/slices/pizzas/types";
 
 export interface IProps {
   image: string;
@@ -104,7 +104,6 @@ function PizzaElementReact({
             console.log(cartItems, id);
             console.log(thickness);
             console.log(activeThickness, activeDiameter);
-            // setCartAmount(cartAmount + 1);
           }}
         >
           <svg>

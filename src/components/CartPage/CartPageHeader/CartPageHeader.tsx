@@ -2,7 +2,7 @@ import classes from "./CartPageHeader.module.scss";
 import cartImg from "../../../assets/images/header/cart2.svg";
 import trashImg from "../../../assets/images/cartBlock/trash.svg";
 import { useDispatch } from "react-redux";
-import { clearCart } from "../../../redux/slices/cartSlice";
+import { clearCart } from "../../../redux/slices/cart/slice";
 
 export function CartPageHeader() {
   const dispatch = useDispatch();

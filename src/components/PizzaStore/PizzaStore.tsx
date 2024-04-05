@@ -6,17 +6,18 @@ import { PizzaElementLoading } from "./PizzaElement/PizzaElementLoading";
 import ReactPaginate from "react-paginate";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../redux/store";
-import { setCurrentPage } from "../../redux/slices/paginationSlice";
 import qs from "qs";
 import { useNavigate } from "react-router-dom";
 import makeUrl from "../../functions/makeUrl";
-import { setCategory, setSorting } from "../../redux/slices/categorySlice";
-import { selectorSearch, setSearch } from "../../redux/slices/searchSlice";
 import { arrSort } from "../../functions/objects";
-import { EStatus, fetchPizzas } from "../../redux/slices/pizzasSlice";
 import type { AppDispatch } from "../../redux/store";
-import type { IItem } from "../../redux/slices/pizzasSlice";
 import { EmptyResponse } from "../OtherPages/EmptyResponse";
+import { selectorSearch } from "../../redux/slices/search/selectors";
+import { EStatus, IItem } from "../../redux/slices/pizzas/types";
+import { setCurrentPage } from "../../redux/slices/pagination/slice";
+import { fetchPizzas } from "../../redux/slices/pizzas/asyncThunk";
+import { setSearch } from "../../redux/slices/search/slice";
+import { setCategory, setSorting } from "../../redux/slices/category/slice";
 
 export function PizzaStore() {
   const categorySlice = useSelector((state: RootState) => state.categorySlice);
@@ -103,30 +104,6 @@ export function PizzaStore() {
     );
 
     window.scrollTo(0, 0);
-
-    // try {
-    //   const data = await axios.get(
-    //     `https://65f744adb4f842e808856702.mockapi.io/pizzas${
-    //       categorySlice.category ? `?category=${categorySlice.category}&` : "?"
-    //     }${`search=${searchSlice}&`}${
-    //       categorySlice.sorting.link
-    //     }&page=${currentPage}&limit=${elementsPerPage}`
-    //   );
-    //   navigate(
-    //     `/?${makeUrl({
-    //       category: categorySlice.category,
-    //       page: currentPage,
-    //       search: searchSlice.value,
-    //       sort: categorySlice.sorting.index,
-    //     })}`
-    //   );
-    //   setPizzasArr(data.data);
-    // } catch {
-    //   setPizzasArr("Not found");
-    // } finally {
-    //   setLoading(false);
-    //   window.scrollTo(0, 0);
-    // }
   };
 
   useEffect(() => {

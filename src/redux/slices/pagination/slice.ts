@@ -1,13 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { IPaginagionProps } from './types';
 
-export interface PaginationState {
-  currentPage: number,
-  number: number,
-  elementsPerPage: number,
-}
-
-const initialState: PaginationState = {
+const initialState: IPaginagionProps = {
   currentPage: 1,
   number: 18,
   elementsPerPage: 8,
@@ -26,8 +21,6 @@ export const paginationSlice = createSlice({
     },
   },
 })
-
-
 
 export const { setCurrentPage, setNumber } = paginationSlice.actions
 

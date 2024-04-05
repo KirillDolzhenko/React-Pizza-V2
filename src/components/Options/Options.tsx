@@ -3,8 +3,8 @@ import { Option } from "./Option/Option";
 import { Sorting } from "./Sorting/Sorting";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../redux/store";
-import { setCategory } from "../../redux/slices/categorySlice";
-import { setCurrentPage } from "../../redux/slices/paginationSlice";
+import { setCategory } from "../../redux/slices/category/slice";
+import { setCurrentPage } from "../../redux/slices/pagination/slice";
 
 function OptionsReact() {
   const category = useSelector(

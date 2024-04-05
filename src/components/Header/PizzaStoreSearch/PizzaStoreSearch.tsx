@@ -3,9 +3,10 @@ import classes from "./PizzaStoreSearch.module.scss";
 import svgSearch from "../../../assets/images/pizzaShop/search/search.svg";
 import svgCross from "../../../assets/images/pizzaShop/search/cross.svg";
 import { useCallback, useEffect, useState } from "react";
-import { selectorSearch, setSearch } from "../../../redux/slices/searchSlice";
 import { useDispatch, useSelector } from "react-redux";
 import debounce from "lodash.debounce";
+import { selectorSearch } from "../../../redux/slices/search/selectors";
+import { setSearch } from "../../../redux/slices/search/slice";
 
 export function PizzaStoreSearch() {
   const [value, setValue] = useState<string>("");

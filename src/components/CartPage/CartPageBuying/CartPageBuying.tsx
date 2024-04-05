@@ -3,19 +3,24 @@ import classNames from "classnames";
 import pathImg from "../../../assets/images/cartBlock/path.svg";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
-import {
-  ICartItem,
-  selectorCartTotalPrice,
-} from "../../../redux/slices/cartSlice";
 import { Link } from "react-router-dom";
+import { countItems } from "../../../functions/countItems";
+import { useEffect, useMemo } from "react";
+import { saveCartLS } from "../../../functions/saveCartLS";
+import { selectorCartTotalPrice } from "../../../redux/slices/cart/selectors";
 
 export function CartPageBuying() {
-  const amount = useSelector((state: RootState) =>
-    state.cartSlice.items.reduce((sum: number, el: ICartItem) => {
-      return el.count + sum;
-    }, 0)
-  );
+  const items = useSelector((state: RootState) => state.cartSlice.items);
+
+  const amount = useMemo(() => {
+    return countItems(items);
+  }, [items]);
+
   const priceCart = useSelector(selectorCartTotalPrice);
+
+  useEffect(() => {
+    saveCartLS(items);
+  }, [items]);
 
   return (
     <section className={classes.buying}>

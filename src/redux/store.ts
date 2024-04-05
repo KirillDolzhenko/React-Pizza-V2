@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import categorySlice from './slices/categorySlice'
-import searchSlice from './slices/searchSlice'
-import paginationSlice from './slices/paginationSlice'
-import cartSlice from './slices/cartSlice'
-import pizzasSlice from './slices/pizzasSlice'
-import descSlice from './slices/descSlice'
+import categorySlice from './slices/category/slice'
+import searchSlice from './slices/search/slice'
+import paginationSlice from './slices/pagination/slice'
+import cartSlice from "./slices/cart/slice"
+import pizzasSlice from './slices/pizzas/slice'
+import descSlice from './slices/desc/slice'
 
 export const store = configureStore({
   reducer: {

@@ -2,8 +2,8 @@ import { Logo } from "./Logo/Logo";
 import { Cart } from "./Cart/Cart";
 import { Link, Route, Routes, useLocation, useParams } from "react-router-dom";
 import { PizzaStoreSearch } from "./PizzaStoreSearch/PizzaStoreSearch";
-import { setCurrentPage } from "../../redux/slices/paginationSlice";
 import { useDispatch } from "react-redux";
+import { setCurrentPage } from "../../redux/slices/pagination/slice";
 
 export function Header() {
   const location = useLocation();

@@ -1,12 +1,8 @@
-import { RootState } from './../store';
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { ISearchProps } from './types';
 
-export interface SearchState {
-  value: string
-}
-
-const initialState: SearchState = {
+const initialState: ISearchProps = {
   value: "",
 }
 
@@ -21,7 +17,5 @@ export const searchSlice = createSlice({
 })
 
 export const { setSearch } = searchSlice.actions
-
-export const selectorSearch = (state: RootState) => state.searchSlice.value;
 
 export default searchSlice.reducer

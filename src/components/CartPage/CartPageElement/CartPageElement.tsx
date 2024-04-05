@@ -7,7 +7,7 @@ import {
   addItem,
   decreaseItem,
   deleteItem,
-} from "../../../redux/slices/cartSlice";
+} from "../../../redux/slices/cart/slice";
 
 interface IPropsCartElement {
   id: number;

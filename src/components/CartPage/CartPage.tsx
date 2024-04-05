@@ -6,9 +6,10 @@ import { CartPageHeader } from "./CartPageHeader/CartPageHeader";
 import { CartPageBuying } from "./CartPageBuying/CartPageBuying";
 import { useSelector } from "react-redux";
 
-import { ICartItem, selectorCartItems } from "../../redux/slices/cartSlice";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { ICartItem } from "../../redux/slices/cart/types";
+import { selectorCartItems } from "../../redux/slices/cart/selectors";
 
 export function CartPage() {
   const items: ICartItem[] = useSelector(selectorCartItems);

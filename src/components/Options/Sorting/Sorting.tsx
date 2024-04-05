@@ -3,9 +3,9 @@ import imageArrow from "../../../assets/images/pizzaShop/arrow.svg";
 import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../../redux/store";
-import { setSorting } from "../../../redux/slices/categorySlice";
-import { setCurrentPage } from "../../../redux/slices/paginationSlice";
 import { arrSort } from "../../../functions/objects";
+import { setSorting } from "../../../redux/slices/category/slice";
+import { setCurrentPage } from "../../../redux/slices/pagination/slice";
 
 export function Sorting() {
   const sorting = useSelector(

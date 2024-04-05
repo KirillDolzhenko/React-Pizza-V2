@@ -1,17 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { ICategory, ICategoryProps } from './types';
 
-interface ISorting {
-  index: number,
-  link: string
-}
-
-export interface CounterState {
-  sorting: ISorting,
-  category: number,
-}
-
-const initialState: CounterState = {
+const initialState: ICategoryProps = {
   sorting: {
     index: 0,
     link: "sortby=rating&order=asc",
@@ -26,7 +17,7 @@ export const counterSlice = createSlice({
     setCategory: (state, action: PayloadAction<number>) => {
       state.category = action.payload;
     },
-    setSorting: (state, action: PayloadAction<ISorting>) => {
+    setSorting: (state, action: PayloadAction<ICategory>) => {
       state.sorting = action.payload;
     },
   },
