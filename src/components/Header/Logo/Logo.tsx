@@ -1,6 +1,7 @@
+import { memo } from "react";
 import logoImg from "../../../assets/images/header/logo.png";
 
-export function Logo() {
+export function LogoReact() {
   return (
     <div className="logoBlock">
       <div className="logoBlock__image">
@@ -13,3 +14,5 @@ export function Logo() {
     </div>
   );
 }
+
+export const Logo = memo(LogoReact);

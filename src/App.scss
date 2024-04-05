@@ -520,6 +520,11 @@
             grid-template-columns: repeat(2, 1fr);
         }
     }
+
+    .header__container {
+        gap: 20px;
+        flex-direction: column;
+    }
 }
 
 @media (max-width: 700px) {

@@ -1,0 +1,41 @@
+.container {
+    // max-width: 100px;
+    margin: 0 auto;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // justify-content: center;
+    gap: 10px;
+}
+
+.title {
+    font-weight: 700;
+}
+
+.text {
+    color: #777;
+    text-align: center;
+    font-weight: 500;
+    max-width: 700px;
+    line-height: 146%;
+    margin-bottom: 40px;
+}
+
+.image {
+    position: relative;
+    height: 270px;
+    width: 360px;
+    margin-bottom: 100px;
+
+    & svg {
+        position: absolute; 
+        top: 0;
+        left: 0;   
+        width: 514px;
+        height: 514px;
+        transform: scale(0.7) translate(-25%, -27%);
+
+
+    }
+}

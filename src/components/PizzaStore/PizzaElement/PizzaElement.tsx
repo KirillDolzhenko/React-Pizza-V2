@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import plusIcon from "../../../assets/images/pizzaShop/plus.svg";
-import { addItem } from "../../../redux/slices/cartSlice";
+import { addItem, selectorCartItems } from "../../../redux/slices/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../redux/store";
+import { AppDispatch, RootState } from "../../../redux/store";
 import { IItem } from "../../../redux/slices/pizzasSlice";
 import { ICartItem } from "../../../redux/slices/cartSlice";
+import { Link } from "react-router-dom";
+import { fetchItem } from "../../../redux/slices/descSlice";
 
 export interface IProps {
   image: string;
@@ -21,7 +23,7 @@ interface IActive {
   disabled?: boolean;
 }
 
-export function PizzaElement({
+function PizzaElementReact({
   image,
   title,
   thickness,
@@ -33,8 +35,7 @@ export function PizzaElement({
   const cartItem: ICartItem[] = useSelector((state: RootState) =>
     state.cartSlice.items.filter((el: ICartItem) => el.id == id)
   );
-
-  const cartItems = useSelector((state: RootState) => state.cartSlice.items);
+  const cartItems = useSelector(selectorCartItems);
 
   const cartAmount = cartItem
     ? cartItem.reduce((sum: number, el: ICartItem) => {
@@ -49,7 +50,7 @@ export function PizzaElement({
     Number(diameter.filter((el) => !Boolean(el.disabled))[0].title)
   );
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   let thicknessArr = thickness.map((el) => (
     <li key={el.title}>
@@ -62,7 +63,6 @@ export function PizzaElement({
       </button>
     </li>
   ));
-
   let diameterArr = diameter.map((el) => (
     <li key={el.title}>
       <button
@@ -77,9 +77,11 @@ export function PizzaElement({
 
   return (
     <li className="pizzaOptions__element pizzaOption">
-      <div className="pizzaOption__img">
-        <img src={image} alt="pizza" />
-      </div>
+      <Link to={`/pizza/${id}`}>
+        <div className="pizzaOption__img">
+          <img src={image} alt="pizza" />
+        </div>
+      </Link>
       <h4 className="pizzaOption__title">{title}</h4>
       <div className="pizzaOption__variants">
         <ul className="pizzaOption__thickness">{thicknessArr}</ul>
@@ -115,3 +117,5 @@ export function PizzaElement({
     </li>
   );
 }
+
+export const PizzaElement = memo(PizzaElementReact);

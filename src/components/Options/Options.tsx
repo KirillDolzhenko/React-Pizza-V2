@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { memo, useContext, useState } from "react";
 import { Option } from "./Option/Option";
 import { Sorting } from "./Sorting/Sorting";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,7 +6,7 @@ import type { RootState } from "../../redux/store";
 import { setCategory } from "../../redux/slices/categorySlice";
 import { setCurrentPage } from "../../redux/slices/paginationSlice";
 
-export function Options() {
+function OptionsReact() {
   const category = useSelector(
     (state: RootState) => state.categorySlice.category
   );
@@ -47,3 +47,5 @@ export function Options() {
     </div>
   );
 }
+
+export const Options = memo(OptionsReact);

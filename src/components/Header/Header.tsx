@@ -1,16 +1,27 @@
 import { Logo } from "./Logo/Logo";
 import { Cart } from "./Cart/Cart";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useLocation, useParams } from "react-router-dom";
 import { PizzaStoreSearch } from "./PizzaStoreSearch/PizzaStoreSearch";
+import { setCurrentPage } from "../../redux/slices/paginationSlice";
+import { useDispatch } from "react-redux";
 
 export function Header() {
+  const location = useLocation();
+
+  const dispatch = useDispatch();
+
   return (
     <header className="header">
       <div className="header__container">
-        <Link to="/">
+        <Link
+          onClick={() => {
+            dispatch(setCurrentPage(1));
+          }}
+          to="/?category=0&page=1&sort=0"
+        >
           <Logo />
         </Link>
-        <PizzaStoreSearch />
+        {location.pathname == "/" && <PizzaStoreSearch />}
         <Routes>
           <Route
             path="/"

@@ -3,7 +3,11 @@ import classNames from "classnames";
 import pathImg from "../../../assets/images/cartBlock/path.svg";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
-import { ICartItem } from "../../../redux/slices/cartSlice";
+import {
+  ICartItem,
+  selectorCartTotalPrice,
+} from "../../../redux/slices/cartSlice";
+import { Link } from "react-router-dom";
 
 export function CartPageBuying() {
   const amount = useSelector((state: RootState) =>
@@ -11,9 +15,7 @@ export function CartPageBuying() {
       return el.count + sum;
     }, 0)
   );
-  const priceCart = useSelector(
-    (state: RootState) => state.cartSlice.totalPrice
-  );
+  const priceCart = useSelector(selectorCartTotalPrice);
 
   return (
     <section className={classes.buying}>
@@ -31,21 +33,21 @@ export function CartPageBuying() {
         </p>
       </p>
       <div className={classes.buying__buttons}>
-        <button
-          className={classNames({
-            [classes.button]: true,
-            [classes.gray]: true,
-          })}
-        >
-          <svg>
-            <use href={`${pathImg}#icon`} />
-          </svg>
-          Вернутся назад
-        </button>
+        <Link to="/">
+          <button
+            className={classNames({
+              [classes.button]: true,
+              [classes.gray]: true,
+            })}
+          >
+            <svg>
+              <use href={`${pathImg}#icon`} />
+            </svg>
+            Вернутся назад
+          </button>
+        </Link>
         <button className={classes.button}>Оплатить сейчас</button>
       </div>
     </section>
   );
 }
-
-//https://65f744adb4f842e808856702.mockapi.io/pizzas?search=%D0%9F%D0%B5%D0%BF%D0%BF%D0%B5%D1%80%D0%BE%D0%BD%D0%B8%20%D0%A4%D1%80%D0%B5%D1%88

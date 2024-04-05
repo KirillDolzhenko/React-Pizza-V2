@@ -53,6 +53,7 @@ export function CartPageElement({
           <div className={classes.pizzasItem__count}>
             <CartPageCuttonCreator
               type={"-"}
+              number={number}
               onClick={() =>
                 dispatch(decreaseItem({ id, thickness, diameter }))
               }
