@@ -11,7 +11,7 @@ import { useEffect } from "react";
 import { ICartItem } from "../../redux/slices/cart/types";
 import { selectorCartItems } from "../../redux/slices/cart/selectors";
 
-export function CartPage() {
+function CartPage() {
   const items: ICartItem[] = useSelector(selectorCartItems);
   const amount = items.reduce((sum: number, el: ICartItem) => {
     return el.count + sum;
@@ -52,3 +52,5 @@ export function CartPage() {
     </>
   );
 }
+
+export default CartPage;

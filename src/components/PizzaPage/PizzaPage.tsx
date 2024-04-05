@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { fetchItem } from "../../redux/slices/desc/asyncThunk";
 import { setPizzaPage } from "../../redux/slices/desc/slice";
 
-export function PizzaPage() {
+function PizzaPage() {
   const pizza = useSelector((state: RootState) => state.descSlice.item);
   const status = useSelector((state: RootState) => state.descSlice.status);
 
@@ -40,3 +40,5 @@ export function PizzaPage() {
     </div>
   );
 }
+
+export default PizzaPage;

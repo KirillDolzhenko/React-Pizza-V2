@@ -4,7 +4,7 @@ import classes from "./EmptyCart.module.scss";
 import classes2 from "../CartPage/CartPageBuying/CartPageBuying.module.scss";
 import classNames from "classnames";
 
-export function EmptyCart() {
+function EmptyCart() {
   return (
     <div className={classes.container}>
       <h1 className={classes.title}>Корзина пустая 😰</h1>
@@ -28,3 +28,5 @@ export function EmptyCart() {
     </div>
   );
 }
+
+export default EmptyCart;

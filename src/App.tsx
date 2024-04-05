@@ -1,14 +1,9 @@
 import "./nullstyle.scss";
 import "./App.scss";
-import { Header } from "./components/Header/Header";
-import { DivisionLine } from "./components/DivisionLine/DivisionLine";
-import { PizzaStore } from "./components/PizzaStore/PizzaStore";
+// import { PizzaStore } from "./components/PizzaStore/PizzaStore";
 import { Routes, Route } from "react-router-dom";
-import { CartPage } from "./components/CartPage/CartPage";
-import { createContext } from "react";
-import { EmptyCart } from "./components/OtherPages/EmptyCart";
+import { Suspense, createContext, lazy } from "react";
 import { WrapperApp } from "./WrapperApp";
-import { PizzaPage } from "./components/PizzaPage/PizzaPage";
 
 interface IAppContext {
   value: string;
@@ -24,21 +19,68 @@ export const AppContext = createContext<IAppContext>({
   setValueSearch(value) {},
 });
 
+const PizzaStoreLazy = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "PizzaStore" */ "./components/PizzaStore/PizzaStore"
+    )
+);
+const PizzaPageLazy = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "PizzaPage" */ "./components/PizzaPage/PizzaPage"
+    )
+);
+const CartPageLazy = lazy(
+  () =>
+    import(/* webpackChunkName: "CartPage" */ "./components/CartPage/CartPage")
+);
+const EmptyCartLazy = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "EmptyCart" */ "./components/OtherPages/EmptyCart"
+    )
+);
+
 function App() {
   return (
-    // <div className="container">
-    //   <Header></Header>
-    //   <DivisionLine></DivisionLine>
     <Routes>
       <Route path="/" element={<WrapperApp />}>
-        <Route path="" element={<PizzaStore />} />
-        <Route path="pizza/:id" element={<PizzaPage />} />
-        <Route path="cart" element={<CartPage />} />
-        <Route path="emptyCart" element={<EmptyCart />} />
+        <Route
+          path=""
+          element={
+            <Suspense fallback="Загрузка...">
+              <PizzaStoreLazy />
+            </Suspense>
+          }
+        />
+        <Route
+          path="pizza/:id"
+          element={
+            <Suspense fallback="Загрузка...">
+              <PizzaPageLazy />
+            </Suspense>
+          }
+        />
+        <Route
+          path="cart"
+          element={
+            <Suspense fallback="Загрузка...">
+              <CartPageLazy />
+            </Suspense>
+          }
+        />
+        <Route
+          path="emptyCart"
+          element={
+            <Suspense fallback="Загрузка...">
+              <EmptyCartLazy />
+            </Suspense>
+          }
+        />
         <Route path="*" element={<h1>Файл не найден, Сорямба(</h1>} />
       </Route>
     </Routes>
-    // </div>
   );
 }
 

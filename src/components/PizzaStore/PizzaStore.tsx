@@ -19,7 +19,7 @@ import { fetchPizzas } from "../../redux/slices/pizzas/asyncThunk";
 import { setSearch } from "../../redux/slices/search/slice";
 import { setCategory, setSorting } from "../../redux/slices/category/slice";
 
-export function PizzaStore() {
+function PizzaStore() {
   const categorySlice = useSelector((state: RootState) => state.categorySlice);
   const searchSlice: string = useSelector(selectorSearch);
   const paginationNumber: number = useSelector(
@@ -158,3 +158,5 @@ export function PizzaStore() {
     </main>
   );
 }
+
+export default PizzaStore;
